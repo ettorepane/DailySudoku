@@ -1,0 +1,48 @@
+td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+    height: 30px;
+    width: 30px;
+    font-size: 30px;
+} 
+
+/* Moving sudoku board in center of screen */
+
+.sudoku-board {
+    display: flex;
+    justify-content: center;
+}
+
+.border-bottom{
+    border-bottom: 2px solid #000000;
+    text-align: left;
+    padding: 8px;
+    height: 30px;
+    width: 30px;
+    font-size: 30px;
+}
+
+.border-right{
+    border-right: 2px solid #000000;
+    text-align: left;
+    padding: 8px;
+    height: 30px;
+    width: 30px;
+    font-size: 30px;
+}
+
+h1{
+    text-align: center;
+    font-size: 50px;
+    margin-top: 20px;
+}
+
+input {
+    /* basically invisible */
+    border: none;
+    background: rgb(236, 249, 176);
+    height: 30px;
+    width: 30px;
+    font-size: 30px;
+}
