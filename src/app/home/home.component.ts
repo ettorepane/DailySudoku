@@ -20,7 +20,7 @@ export class HomeComponent {
     console.log(game);
     //this are two arrays, make an easier version of the game by filling in some of the blanks
     for (var i = 0; i < 81; i++) {
-      if (easierVersion[i] == null && Math.random() < 0.3) {
+      if (easierVersion[i] == null && Math.random() < 0.5) {
         easierVersion[i] = solved[i];
       }
     }
