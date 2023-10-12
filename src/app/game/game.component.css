@@ -7,6 +7,14 @@ td {
     font-size: 30px;
 } 
 
+.correct {
+    background-color: #00ff00;
+}
+
+.wrong {
+    background-color: #ff0000;
+}
+
 /* Moving sudoku board in center of screen */
 
 .sudoku-board {
@@ -46,3 +54,4 @@ input {
     width: 30px;
     font-size: 30px;
 }
+

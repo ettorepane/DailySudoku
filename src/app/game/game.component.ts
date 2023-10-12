@@ -25,6 +25,10 @@ export class GameComponent implements OnInit {
     this.generateGrid();
   }
 
+  showSolution = false;
+  correctSudoku(){
+    this.showSolution = true;
+  }
   async generateGrid() {
     const pb = new pocketbase("https://sudoku.pockethost.io/");
     //get game data from id
@@ -38,11 +42,17 @@ export class GameComponent implements OnInit {
     //all strings to numbers
     this.gridRAW = this.gridRAW.map((e:any,i:number)=>e==null?null:parseInt(e));
 
+    //all grid element +1
+
     console.log(this.gridRAW);
 
     //from array to matrix
     console.log(ratepuzzle(this.gridRAW, 4));
     this.solved = solvepuzzle(this.gridRAW);
+
+    this.gridRAW = this.gridRAW.map((e:any,i:number)=>e==null?null:e+1);
+    this.solved = this.solved.map((e:any,i:number)=>e+1);
+
     this.updateGrid();
   }
 
@@ -50,7 +60,9 @@ export class GameComponent implements OnInit {
     this.grid = this.gridRAW.map((e:any,i:number)=>this.gridRAW.slice(i*this.grid_size,(i+1)*this.grid_size));
     //usergrid is a copy of grid
     this.userGrid = this.grid.map((e:any,i:number)=>this.grid.slice(i*this.grid_size,(i+1)*this.grid_size));
-
+    this.solved = this.solved.map((e:any,i:number)=>this.solved.slice(i*this.grid_size,(i+1)*this.grid_size));
+    console.log(this.grid);
+    console.log(this.userGrid);
   }
 
   onKey(event:any, i:number, j:number) {
