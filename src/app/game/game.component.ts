@@ -55,7 +55,6 @@ export class GameComponent implements OnInit {
 
   onKey(event:any, i:number, j:number) {
     this.userGrid[i][j] = event.target.value;
-    alert(this.userGrid[i][j]);  
   }
 
 }
