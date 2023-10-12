@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { makepuzzle, solvepuzzle, ratepuzzle } from "sudoku";
 import pocketbase from 'pocketbase';
+import timer from 'easytimer.js';
 
 @Component({
   selector: 'app-game',
@@ -28,12 +29,14 @@ export class GameComponent implements OnInit {
   showSolution = false;
   correctSudoku(){
     this.showSolution = true;
+    this.timerInstance.pause();
   }
+  loading = true;
+  timerInstance = new timer();
   async generateGrid() {
     const pb = new pocketbase("https://sudoku.pockethost.io/");
     //get game data from id
     var game = await pb.collection('games').getOne(this.id);
-
     //@ts-ignore
     this.gridRAW = game.game.split(",");
 
@@ -54,6 +57,8 @@ export class GameComponent implements OnInit {
     this.solved = this.solved.map((e:any,i:number)=>e+1);
 
     this.updateGrid();
+    this.loading = false;
+    this.timerInstance.start(/* config */);
   }
 
   updateGrid() {

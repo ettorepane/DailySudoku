@@ -1,7 +1,10 @@
 <h1>Sudoku</h1>
 
 <div class="sudoku-board" >
-    <table *ngIf="!showSolution">
+    <mat-spinner *ngIf="loading">
+
+    </mat-spinner>
+    <table *ngIf="!showSolution && !loading">
       <tr *ngFor="let row of grid; let i = index" >
         <!--IF ROW IS 3 OR 6 APPLY CLASS -->
         <td *ngFor="let cell of row; let j = index" [ngClass]="{'border-right': (j == 2 || j == 5), 'border-bottom': (i == 2 || i == 5)}">
@@ -20,8 +23,11 @@
           </tr>
     </table>
 </div>
-<div class="sudoku-board">
-    <button mat-raised-button color="primary" (click)="correctSudoku()">
-        Correct!</button>
+<div class="sudoku-board" *ngIf="!loading">
+    <h1>{{timerInstance.getTimeValues().toString()}}</h1>
+</div>
+<div class="sudoku-board" *ngIf="!loading">
+    <button mat-raised-button color="primary" (click)="correctSudoku()" >
+        I've done, proceed with correction!</button>
 </div>
 
