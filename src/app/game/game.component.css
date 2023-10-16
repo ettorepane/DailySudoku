@@ -51,9 +51,8 @@ input {
     width: 30px;
     height: 30px;
     font-size: 100%;
-    max-width: 5vw;
-    max-height: 5vw;
-
-
+    max-width: 4vw;
+    overflow-x: hidden;
+    overflow-y: hidden;
 }
 
