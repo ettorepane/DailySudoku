@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { makepuzzle, solvepuzzle, ratepuzzle } from "sudoku";
 import pocketbase from 'pocketbase';
 import timer from 'easytimer.js';
+import { Cron } from "croner";
+
 
 @Component({
   selector: 'app-game',
@@ -10,8 +12,6 @@ import timer from 'easytimer.js';
 })
 export class GameComponent implements OnInit {
   title = 'DailySudoku';
-
-
   //game id taken from url
   id = window.location.pathname.split("/")[2];
   // sudoku grid generation 9x9
@@ -35,8 +35,10 @@ export class GameComponent implements OnInit {
   timerInstance = new timer();
   async generateGrid() {
     const pb = new pocketbase("https://sudoku.pockethost.io/");
-    //get game data from id
-    var game = await pb.collection('games').getOne(this.id);
+    //get game data from shortID
+
+    var game = await pb.collection('games').getFirstListItem('shortID="'+this.id+'"');
+
     //@ts-ignore
     this.gridRAW = game.game.split(",");
 
@@ -58,7 +60,28 @@ export class GameComponent implements OnInit {
 
     this.updateGrid();
     this.loading = false;
-    this.timerInstance.start(/* config */);
+    this.checkStarted();
+    //every 5 sec 
+    setInterval(()=>this.checkStarted(), 3000);
+  }
+
+  gameStarted = false;
+  
+  async checkStarted() {
+    if(this.gameStarted == true){
+      return;
+    }
+    console.log("checking started");
+    const pb = new pocketbase("https://sudoku.pockethost.io/");
+    //get game data from shortID
+    await pb.collection('games').getFirstListItem('shortID="'+this.id+'"').then((game:any)=>{
+      //@ts-ignore
+      if(game.started == true){
+        this.timerInstance.start(/* config */);
+        this.gameStarted = true;
+      }
+    });
+
   }
 
   updateGrid() {
@@ -73,5 +96,6 @@ export class GameComponent implements OnInit {
   onKey(event:any, i:number, j:number) {
     this.userGrid[i][j] = event.target.value;
   }
+
 
 }

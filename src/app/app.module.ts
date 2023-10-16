@@ -12,10 +12,10 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatSliderModule} from '@angular/material/slider';
-
-
-
-
+import { ClipboardModule } from '@angular/cdk/clipboard';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatIconModule} from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
 
 
 @NgModule({
@@ -32,8 +32,11 @@ import {MatSliderModule} from '@angular/material/slider';
     MatButtonModule,
     MatProgressSpinnerModule,
     MatDialogModule,
-    MatSliderModule
-    
+    MatSliderModule,
+    ClipboardModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]

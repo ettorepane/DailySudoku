@@ -1,6 +1,13 @@
 <h1>Sudoku</h1>
 
-<div class="sudoku-board" >
+<div *ngIf="!gameStarted">
+  <h2
+  style="text-align: center;"
+  >
+    Waiting for game to start...</h2>
+</div>
+
+<div class="sudoku-board" *ngIf="gameStarted">
     <mat-spinner *ngIf="loading">
 
     </mat-spinner>

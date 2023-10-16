@@ -21,6 +21,7 @@
     "@angular/platform-browser-dynamic": "^16.0.0",
     "@angular/router": "^16.0.0",
     "@forfuns/sudoku": "^1.2.1",
+    "croner": "^7.0.2",
     "easytimer.js": "^4.6.0",
     "pocketbase": "^0.18.2",
     "rxjs": "~7.8.0",

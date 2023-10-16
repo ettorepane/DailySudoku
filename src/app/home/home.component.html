@@ -2,27 +2,60 @@
     <h1>Sudoku</h1>
     <h2>the multiplayer version</h2>
 
-    <h3>Select Difficulty</h3>
-    <mat-slider
-      class="example-margin"
-      [disabled]="false"
-      [max]="100"
-      [min]="20"
-      [step]="20"
-      [displayWith]="formatLabel"
-      [discrete]="true">
-      <input matSliderThumb [(ngModel)]="difficultySlider"  #slider>
-    </mat-slider>
+    <div
+    class="game-created"
+    *ngIf="gameCreatedID == ''"
+    style="display: flex; flex-direction: column; align-items: center; justify-content: center;"
+    >
+    <h2>Create a new game</h2>
+        <h3 *ngIf="gameCreatedID == ''">Select Difficulty</h3>
+        <mat-slider
+        class="example-margin"
+        [disabled]="false"
+        [max]="100"
+        [min]="20"
+        [step]="20"
+        [displayWith]="formatLabel"
+        *ngIf="gameCreatedID == ''"
+        [discrete]="true">
+        <input matSliderThumb [(ngModel)]="difficultySlider"  #slider>
+        </mat-slider>
 
-    
-    <button mat-raised-button color="primary" (click)="createGame()" *ngIf="gameCreatedID == ''">
-        Create a new game</button>
+        
+        <button mat-raised-button color="primary" (click)="createGame()" *ngIf="gameCreatedID == ''">
+            Create a new game</button>
+    </div>
 
     <div
         class="game-created"
-        *ngIf="gameCreatedID != ''">
+        *ngIf="gameCreatedID != ''"
+        style="display: flex; flex-direction: column; align-items: center; justify-content: center;"
     >
 
+
+    <h1
+    style="color: darkblue;
+    letter-spacing: 10px;
+    "
+    
+    >
+        {{shortID}}</h1>
+    <h4>Share this code to your friends!</h4>
+    <h5>Or copy the following URL:</h5>
+    <mat-form-field>
+        <input matInput type="text" value="https://sudoku.ettore.one/game/{{shortID}}" name="field" readonly>
+        <button mat-icon-button matSuffix  [attr.aria-label]="'Hide password'"
+        [cdkCopyToClipboard]="'https://sudoku.ettore.one/game/' + shortID"
+        >
+            <mat-icon>copy_all</mat-icon>
+        </button>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" 
+    (click)="startGame()"
+    >
+        Start game
+    </button>
     </div>
 </main>
 

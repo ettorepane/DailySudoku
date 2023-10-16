@@ -11,11 +11,14 @@ import {MatSliderModule} from '@angular/material/slider';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
+  constructor( private router: Router) { }
 
 
   gameCreatedID = "";
+  shortID = "";
+  ownerToken = "";
 
-  difficultySlider = 20;
+  difficultySlider = 60;
 
 
   async createGame() {
@@ -31,33 +34,55 @@ export class HomeComponent {
         easierVersion[i] = solved[i];
       }
     }
-    //game needs to be json
+    //customID made with alphanumeric characters A-Z, 0-9.
+    //length 7
+    var shortID = "";
+    var possible = "ABCDEFGHIJKLMNPQRSTUVWXYZ123456789";
+    for (var i = 0; i < 7; i++)
+      shortID += possible.charAt(Math.floor(Math.random() * possible.length));
+    this.shortID = shortID;
+    console.log(shortID);
+    this.ownerToken = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+    //expiry 24h
+    var expiry = new Date();
+    expiry.setDate(expiry.getDate() + 1);
     var data = {
+      OwnerToken: this.ownerToken,
+      expiry: expiry,
+      shortID: shortID,
       game: easierVersion.toString(),
       solved: solved
     }
     const record = await pb.collection('games').create(data);
     //goto game/:id
     this.gameCreatedID = record.id;
-    window.location.href = "/game/" + record.id;
   }
 
 
   formatLabel(value: number): string {
     switch (value) {
       case 20:
-        return 'Easy';
+        return 'Beginner';
       case 40:
-        return 'Medium';
+        return 'Easy';
       case 60:
-        return 'Hard';
+        return 'Medium';
       case 80:
-        return 'Expert';
+        return 'Hard';
       case 100:
-        return 'Diabolic';
+        return 'Expert';
       default:
         return '';
     }
+  }
+
+  async startGame() {
+    const pb = new pocketbase("https://sudoku.pockethost.io/");
+    //set started to true
+    var update = await pb.collection('games').update(this.gameCreatedID, { started: true });
+
+    this.router.navigate(['/game', this.shortID]);
+
   }
 
 
