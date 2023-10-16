@@ -1,3 +1,30 @@
-<button mat-raised-button color="primary" (click)="createGame()">
-    Create a new game</button>
+<main>
+    <h1>Sudoku</h1>
+    <h2>the multiplayer version</h2>
+
+    <h3>Select Difficulty</h3>
+    <mat-slider
+      class="example-margin"
+      [disabled]="false"
+      [max]="100"
+      [min]="20"
+      [step]="20"
+      [displayWith]="formatLabel"
+      [discrete]="true">
+      <input matSliderThumb [(ngModel)]="difficultySlider"  #slider>
+    </mat-slider>
+
+    
+    <button mat-raised-button color="primary" (click)="createGame()" *ngIf="gameCreatedID == ''">
+        Create a new game</button>
+
+    <div
+        class="game-created"
+        *ngIf="gameCreatedID != ''">
+    >
+
+    </div>
+</main>
+
+
 
