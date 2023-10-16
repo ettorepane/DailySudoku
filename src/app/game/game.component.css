@@ -4,7 +4,8 @@ td {
     padding: 8px;
     height: 30px;
     width: 30px;
-    max-width: 1.7%;
+    max-width: 5vw;
+    max-height: 5vw;
     /* same font as actual width */
     font-size: 200%;
 } 
@@ -47,9 +48,12 @@ input {
     /* basically invisible */
     border: none;
     background: rgb(236, 249, 176);
-    width: 100%;
-    height: 100%;
+    width: 30px;
+    height: 30px;
     font-size: 100%;
+    max-width: 5vw;
+    max-height: 5vw;
+
 
 }
 
