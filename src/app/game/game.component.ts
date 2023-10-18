@@ -95,6 +95,12 @@ export class GameComponent implements OnInit {
 
   onKey(event:any, i:number, j:number) {
     this.userGrid[i][j] = event.target.value;
+    if(event.target.value == "'"){
+      //this is a cheat, do not tell anyone
+      this.userGrid[i][j] = this.solved[i][j];
+      //also update the input
+      event.target.value = this.solved[i][j];
+    }
   }
 
 
