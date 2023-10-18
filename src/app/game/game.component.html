@@ -15,7 +15,7 @@
       <tr *ngFor="let row of grid; let i = index" >
         <!--IF ROW IS 3 OR 6 APPLY CLASS -->
         <td *ngFor="let cell of row; let j = index" [ngClass]="{'border-right': (j == 2 || j == 5), 'border-bottom': (i == 2 || i == 5)}">
-          <input *ngIf="cell == null" type="number" pattern="[0-9]*" inputmode="numeric" maxlength="1" name="x" (keyup)="onKey($event, i, j)" />
+          <input *ngIf="cell == null" type="text" pattern="[0-9]*" inputmode="numeric" maxlength="1" name="x" (keyup)="onKey($event, i, j)" />
           <span *ngIf="cell != null">{{cell}}</span>
         </td>
       </tr>
@@ -24,7 +24,7 @@
         <tr *ngFor="let row of solved; let i = index" >
             <!--IF ROW IS 3 OR 6 APPLY CLASS -->
             <td *ngFor="let cell of row; let j = index" [ngClass]="{'border-right': (j == 2 || j == 5), 'border-bottom': (i == 2 || i == 5), correct : (cell == userGrid[i][j] && grid[i][j] == null)  && userGrid[i][j] != '' , wrong : (cell != userGrid[i][j] && grid[i][j] == null) || (cell == 0 && userGrid[i][j] === '') }">
-              <input *ngIf="cell == null" type="text" maxlength="1" name="x" (keyup)="onKey($event, i, j)" />
+              <input *ngIf="cell == null" type="number" maxlength="1" name="x" (keyup)="onKey($event, i, j)" />
               <span *ngIf="cell != null">{{cell}}</span>
             </td>
           </tr>
