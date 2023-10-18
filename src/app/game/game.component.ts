@@ -22,6 +22,18 @@ export class GameComponent implements OnInit {
   solved :any = [];
   userGrid :any = [];
 
+  cheatON = false;
+
+  toggleCheat(){
+    this.cheatON = !this.cheatON;
+    if(this.cheatON){
+      alert("Cheat mode ON");
+    }
+    else{
+      alert("Cheat mode OFF");
+    }
+  }
+
   ngOnInit(): void {
     this.generateGrid();
   }
@@ -95,7 +107,7 @@ export class GameComponent implements OnInit {
 
   onKey(event:any, i:number, j:number) {
     this.userGrid[i][j] = event.target.value;
-    if(event.target.value == "'"){
+    if(event.target.value == "'" && this.cheatON){
       //this is a cheat, do not tell anyone
       this.userGrid[i][j] = this.solved[i][j];
       //also update the input
