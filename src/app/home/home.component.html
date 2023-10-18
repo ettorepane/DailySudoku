@@ -57,6 +57,16 @@
         Start game
     </button>
     </div>
+    <hr>
+    <p>Or</p>
+    <mat-form-field>
+        <mat-label>Insert game code...</mat-label>
+        <input matInput type="text" name="localcode" [(ngModel)]="localcode">
+        <button *ngIf="localcode" matSuffix mat-icon-button aria-label="Clear" [routerLink]="['/game', localcode.toUpperCase()]">
+            <mat-icon>send</mat-icon>
+        </button>
+        
+    </mat-form-field>
 </main>
 
 

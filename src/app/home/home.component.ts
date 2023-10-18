@@ -13,7 +13,7 @@ import {MatSliderModule} from '@angular/material/slider';
 export class HomeComponent {
   constructor( private router: Router) { }
 
-
+  localcode = "";
   gameCreatedID = "";
   shortID = "";
   ownerToken = "";
